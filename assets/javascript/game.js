@@ -39,6 +39,44 @@ function startGame() {
     console.log(blanksAndCorrect);
 }
 
+var isLetterInWord = false;
+
+function checkLetters(letter) {
+    
+    for (var i = 0; i < numBlanks; i++) {
+        if(selectedWord[i] == letter) {
+            isLetterInWord = true;
+        }
+    }
+}
+    if (isLetterInWord) {
+        for (var i = 0; i < numBlanks; i++) {
+            if(selectedWord[i] == letter) {
+                blanksAndCorrect[i] = letter;
+            } 
+        }
+    }
+    
+    else {
+        incorrectLetters.push(letter);
+        remainingGuesses--
+    }
+
+function roundComplete() {
+    console.log("Win Count: " + wins + " | Loss Count: " + losses + " | Guesses Left: " + remainingGuesses);
+
+    if (lettersInWord.tostring() == blanksAndCorrect.string()) {
+        wins++
+        alert("You Win!");
+
+        document.getElementById("winCounter").innerHTML = wins;
+
+        startGame();
+    }
+}
+  
+
+
 
 //Main Process
 // --------------------------------------------------------
@@ -46,4 +84,8 @@ startGame();
 
 document.onkeyup = function(event) {
     var lettersGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+    checkLetters(lettersGuessed);
+    roundComplete();
+
+    console.log(lettersGuessed);
 }
