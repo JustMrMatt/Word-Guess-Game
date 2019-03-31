@@ -2,13 +2,13 @@
 // --------------------------------------------------------
 var words = ["Hodor", "Hodor Hodor", "Hodor Hodor Hodor", "Hold The Door"];
 var selectedWord = "";
-var LettersInWord = [];
+var lettersInWord = [];
 var numBlanks = 0;
 var blanksAndCorrect = [];
 var incorrectLetters = [];
 var wins = 0;
 var losses = 0;
-var remainingGuesses = 9;
+var remainingGuesses = 8;
 
 
 //Functions
@@ -41,7 +41,7 @@ function startGame() {
 
 var isLetterInWord = false;
 
-function checkLetters(letter) {
+function checkLetters(letter){
     
     for (var i = 0; i < numBlanks; i++) {
         if(selectedWord[i] == letter) {
@@ -56,20 +56,32 @@ function checkLetters(letter) {
             } 
         }
     }
-    
     else {
-        incorrectLetters.push(letter);
+        incorrectLetters.push("letter");
         remainingGuesses--
     }
 
 function roundComplete() {
     console.log("Win Count: " + wins + " | Loss Count: " + losses + " | Guesses Left: " + remainingGuesses);
 
-    if (lettersInWord.tostring() == blanksAndCorrect.string()) {
+document.getElementById("numGuesses").innerHTML = remainingGuesses;
+document.getElementById("wordToGuess").innerHTML = blanksAndCorrect.join("_");
+document.getElementById("wrongGuesses").innerHTML = incorrectLetters.join("_");
+
+    if (lettersInWord.toString() == blanksAndCorrect.toString()) {
         wins++
         alert("You Win!");
 
         document.getElementById("winCounter").innerHTML = wins;
+
+        startGame();
+    }
+
+    else if (remainingGuesses = 0) {
+        losses++;
+        alert("You Lost!");
+
+        document.getElementById("lossCounter").innerHTML = losses;
 
         startGame();
     }
