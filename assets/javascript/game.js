@@ -6,6 +6,8 @@ var lettersInWord = [];
 var numBlanks = 0;
 var blanksAndCorrect = [];
 var incorrectLetters = [];
+
+
 var wins = 0;
 var losses = 0;
 var remainingGuesses = 8;
@@ -58,15 +60,15 @@ function checkLetters(letter){
     }
     else {
         incorrectLetters.push("letter");
-        remainingGuesses--
+        remainingGuesses--;
     }
 
 function roundComplete() {
     console.log("Win Count: " + wins + " | Loss Count: " + losses + " | Guesses Left: " + remainingGuesses);
 
 document.getElementById("numGuesses").innerHTML = remainingGuesses;
-document.getElementById("wordToGuess").innerHTML = blanksAndCorrect.join("_");
-document.getElementById("wrongGuesses").innerHTML = incorrectLetters.join("_");
+document.getElementById("wordToGuess").innerHTML = blanksAndCorrect.join(" ");
+document.getElementById("wrongGuesses").innerHTML = incorrectLetters.join(" ");
 
     if (lettersInWord.toString() == blanksAndCorrect.toString()) {
         wins++
@@ -87,17 +89,14 @@ document.getElementById("wrongGuesses").innerHTML = incorrectLetters.join("_");
     }
 }
   
-
-
-
 //Main Process
 // --------------------------------------------------------
 startGame();
 
 document.onkeyup = function(event) {
-    var lettersGuessed = String.fromCharCode(event.keyCode).toLowerCase();
-    checkLetters(lettersGuessed);
+    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+    checkLetters(letterGuessed);
     roundComplete();
 
-    console.log(lettersGuessed);
+    console.log(letterGuessed);
 }
